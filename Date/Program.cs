@@ -1,5 +1,31 @@
 ﻿using Dates;
+using Dates.Complex_Classes_1;
+using System.Net.Http.Headers;
 
+void DateProgram()
+{
+    Date date = new Date(19, 9, 1981);
+    Date date1 = date;
+    date.SetDay(20);
+    date1.SetYear(1983);
+    Console.WriteLine($"{date}\n{date1}");
+    Date date2 = new Date();
+    Console.WriteLine(date2);
+    Date date3 = new Date(20, 6, 2016);
+    Date date4 = date3;
+    date3.SetDay(1);
+    date4.SetMonth(9);
+    date4 = new Date(date3);
+    Console.WriteLine(date4);
+    Date date5 = new Date(15, 3, 2012);
+    Console.WriteLine($"{date5}: {(date5.IsLeapYear() ? "Is" : "Isnt")} a leap year");
+    Date date6 = new Date(20, 6, 2016);
+    Date date7 = new Date(21, 6, 2016);
+    Date date8 = new Date(date6);
+    Console.WriteLine(date6.Compare(date7));
+    Console.WriteLine(date7.Compare(date6));
+    Console.WriteLine(date8.Compare(date6));
+}
 void ChildProgram()
 {
     Child c1 = new Child("Judith", "111", 'F', new Date(15, 9, 2005));
@@ -45,6 +71,38 @@ void Main()
     Console.WriteLine(message2);
     Console.WriteLine("\nThe timeline makes no sence ignore it...");
 }
+void TravelerProgram()
+{
+    Traveler travler = new Traveler(new Passport("person1", 1, new Date(1, 1, 2009)), true);
+    Traveler travler1 = new Traveler(new Passport("person2", 2, new Date(1, 1, 2007)), true);
+    Traveler travler2 = new Traveler(new Passport("person3", 3, new Date(1, 2, 2008)), false);
+    if (travler.CheckTravel(new Date(1, 1, 2008)))
+        Console.WriteLine(travler);
+    if (travler1.CheckTravel(new Date(1, 1, 2008)))
+        Console.WriteLine(travler1);
+    if (travler2.CheckTravel(new Date(1, 1, 2008)))
+        Console.WriteLine(travler2);
+    Console.WriteLine("After paying t2 is?");
+    travler2.Pay();
+    if (travler2.CheckTravel(new Date(1, 1, 2008)))
+        Console.WriteLine(travler2);
+
+}
+void ProgramAB()
+{
+    A a = new A(10);
+    B b = new B(a);
+    a.SetX(7);
+    A a1 = b.GetA();
+    a1.SetX(13);
+    Console.WriteLine(a);
+    Console.WriteLine(a1);
+    Console.WriteLine(b);
+    //The issue with sharing memory is that you can change stuff you dont expect to be changed and then get errors and unexpected results
+    //its best to just use the copy CTOR if you can.
+}
 //Main();
-ChildProgram();
+//ChildProgram();
 //MessageProgram();
+//DateProgram();
+//TravelerProgram();
